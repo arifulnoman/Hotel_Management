@@ -106,7 +106,6 @@
         $values =  [$frm_data['rem_member']];
 
         $pre_q = "SELECT * FROM `team_details` WHERE `sr_no`=?";
-
         $res = select($pre_q,$values,'i');
         $img = mysqli_fetch_assoc($res);
         
