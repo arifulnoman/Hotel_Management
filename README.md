@@ -4,5 +4,5 @@ Here is a project for Hotel Management developed using PHP. It includes features
 
 ## Screenshots
 
-<img src="Screen Shots\1.jpg" width="400">
-<img src="Screen Shots\2.jpg" width="400">
+<img src="https://github.com/arifulnoman/Hotel_Management/blob/main/Screen%20Shots/1.JPG">
+<img src="https://github.com/arifulnoman/Hotel_Management/blob/main/Screen%20Shots/2.JPG">
