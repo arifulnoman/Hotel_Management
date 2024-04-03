@@ -39,14 +39,14 @@
                                 <table class="table table-hover border text-center">
                                     <thead>
                                         <tr class="bg-dark text-light">
-                                        <th scope="col">No.</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Area</th>
-                                        <th scope="col">Guests</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Action</th>
+                                            <th scope="col">No.</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Area</th>
+                                            <th scope="col">Guests</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="room-data">

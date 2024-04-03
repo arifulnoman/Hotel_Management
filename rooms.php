@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Goriber Hotel - ROOMS</title>
         <?php require('inc/links.php');?>
+        <title><?php echo $settings_r['site_title'] ?> - ROOMS</title>
     </head>
 
     <body class="bg-light">
@@ -74,7 +74,7 @@
                 <div class="col-lg-9 col-md-12 px-4">
 
                 <?php
-                    $room_res = select("SELECT * FROM `rooms` WHERE `status`=? AND `removed`=?",[1,0],'ii');
+                    $room_res = select("SELECT * FROM `rooms` WHERE `status`=? AND `removed`=? ORDER BY `id` DESC",[1,0],'ii');
                     while($room_data = mysqli_fetch_assoc($room_res))
                     {
                         //Getting Features from rooms
@@ -84,7 +84,7 @@
                         $features_data = "";
                         while($fea_row = mysqli_fetch_assoc($fea_q))
                         {
-                            $features_data .="<span class='badge rounded-pill bg-light text-dark text-wrap'>
+                            $features_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
                                 $fea_row[name]
                             </span>";
                         }
@@ -96,7 +96,7 @@
                         $facilities_data = "";
                         while($fac_row = mysqli_fetch_assoc($fac_q))
                         {
-                            $facilities_data .="<span class='badge rounded-pill bg-light text-dark text-wrap'>
+                            $facilities_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
                                 $fac_row[name]
                             </span>";
                         }
@@ -111,6 +111,22 @@
                             $thumb_res = mysqli_fetch_assoc($thumb_q);
                             $room_thumb = ROOMS_IMG_PATH . $thumb_res['image'];
                         }
+
+
+                        $book_btn = "";
+
+                        if(!$settings_r['shutdown'])
+                        {
+                            $login = 0;
+
+                            if(isset($_SESSION['login']) && $_SESSION['login'] == true)
+                            {
+                                $login = 1;
+                            }
+
+                            $book_btn = "<button onclick='checkLoginToBook($login,$room_data[id])' class='btn btn-sm w-100 text-white custom-bg shadow-none mb-2'>Book Now</button>";
+                        }
+
 
                         //Print Room Card
 
@@ -142,7 +158,7 @@
                                     </div>
                                     <div class="col-md-2 mt-lg- 0 mt-md-0 mt-4 text-center">
                                         <h6 class="mb-4">BDT $room_data[price] per night</h6>
-                                        <a href="#" class="btn btn-sm w-100 text-white custom-bg shadow-none mb-2">Book Now</a>
+                                        $book_btn
                                         <a href="room_details.php?id=$room_data[id]" class="btn btn-sm w-100 btn-outline-dark shadow-none">More Details</a>
                                     </div>
                                 </div>

@@ -7,6 +7,7 @@
     define('CAROUSEL_IMG_PATH',SITE_URL.'images/carousel/');
     define('FACILITIES_IMG_PATH',SITE_URL.'images/facilities/');
     define('ROOMS_IMG_PATH',SITE_URL.'images/rooms/');
+    define('USERS_IMG_PATH',SITE_URL.'images/users/');
 
     //this path is needed to upload images in backend
 
@@ -15,6 +16,13 @@
     define('CAROUSEL_FOLDER','carousel/');
     define('FACILITIES_FOLDER','facilities/');
     define('ROOMS_FOLDER','rooms/');
+    define('USERS_FOLDER','users/');
+
+    //sendgrid API key
+
+    define('SENDGRID_API_KEY',"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");
+    define('SENDGRID_EMAIL',"haqueariful33@gmail.com");
+    define('SENDGRID_NAME',"Goriber HOTEL");
 
     //function for checking that admin is logged in or not
     function adminLogin()
@@ -123,4 +131,43 @@
         }
     }
 
+    //function to upload user image
+    function uploadUserImage($image)
+    {
+        $valid_mime = ['image/jpg','image/jpeg','image/png','image/webp'];
+        $img_mime = $image['type'];
+
+        if(!in_array($img_mime,$valid_mime))
+        {
+            return 'inv_img';   //invalid format
+        }
+        else
+        {
+            $ext = pathinfo($image['name'],PATHINFO_EXTENSION);
+            $rname = 'IMG_'.random_int(11111,99999).".jpeg";
+            $img_path = UPLOAD_IMAGE_PATH.USERS_FOLDER.$rname;
+
+            if($ext == 'png' || $ext == 'PNG')
+            {
+                $img = imagecreatefrompng($image['tmp_name']);
+            }
+            else if($ext == 'webp' || $ext == 'WEBP')
+            {
+                $img = imagecreatefromwebp($image['tmp_name']);
+            }
+            else
+            {
+                $img = imagecreatefromjpeg($image['tmp_name']);
+            }
+
+            if(imagejpeg($img,$img_path,75))
+            {
+                return $rname;
+            }
+            else
+            {
+                return 'upd_failed';
+            }
+        }
+    }
 ?>
